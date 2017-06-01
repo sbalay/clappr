@@ -138,6 +138,7 @@ export default class HLS extends HTML5VideoPlayback {
     this._playlistType = null
     this._recoverAttemptsRemaining = this.options.hlsRecoverAttempts || 16
     this._startTimeUpdateTimer()
+    this._setupHls()
   }
 
   _setupHls() {
@@ -353,8 +354,6 @@ export default class HLS extends HTML5VideoPlayback {
   stop() {
     if (this._hls) {
       super.stop()
-      this._hls.destroy()
-      delete this._hls
     }
   }
 
