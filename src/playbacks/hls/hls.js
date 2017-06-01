@@ -138,7 +138,9 @@ export default class HLS extends HTML5VideoPlayback {
     this._playlistType = null
     this._recoverAttemptsRemaining = this.options.hlsRecoverAttempts || 16
     this._startTimeUpdateTimer()
-    this._setupHls()
+    if (this.options.prefetch) {
+      this._setupHls()
+    }
   }
 
   _setupHls() {
@@ -332,6 +334,10 @@ export default class HLS extends HTML5VideoPlayback {
       total: this.getDuration()
     }
     this.trigger(Events.PLAYBACK_PROGRESS, progress, buffered)
+  }
+
+  prefetch() {
+    this._setupHls()
   }
 
   play() {

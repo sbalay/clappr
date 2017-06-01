@@ -10971,7 +10971,9 @@ var HLS = function (_HTML5VideoPlayback) {
     _this._playlistType = null;
     _this._recoverAttemptsRemaining = _this.options.hlsRecoverAttempts || 16;
     _this._startTimeUpdateTimer();
-    _this._setupHls();
+    if (_this.options.prefetch) {
+      _this._setupHls();
+    }
     return _this;
   }
 
@@ -11187,6 +11189,10 @@ var HLS = function (_HTML5VideoPlayback) {
       total: this.getDuration()
     };
     this.trigger(_events2.default.PLAYBACK_PROGRESS, progress, buffered);
+  };
+
+  HLS.prototype.prefetch = function prefetch() {
+    this._setupHls();
   };
 
   HLS.prototype.play = function play() {
